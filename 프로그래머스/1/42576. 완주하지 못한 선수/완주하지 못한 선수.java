@@ -1,28 +1,28 @@
-import java.util.Arrays;
+import java.util.Map;
+import java.util.HashMap;
 
 class Solution {
     public String solution(String[] participant, String[] completion) {
-        // 완주하지 못한 선수 한 명을 리턴하는 문제
-        // edge case : 경기에 참여한 선수가 1명일 경우 -> 아무도 완주하지 못함.
-            // 즉, completion이 빈 배열일 수도 있음
+        Map<String, Integer> mp = new HashMap<>();
         
-        // 푸는 방법
-        // 1. 정렬
-        // 2. 한 명씩 비교하며 있는지 없는지 검사
-        
-        // 완주한 사람이 없다면
-        if (completion.length < 1) {
-            return participant[0];
+        for (String name : participant) {
+            mp.put(name, mp.getOrDefault(name, 0) + 1);
         }
         
-        Arrays.sort(participant);
-        Arrays.sort(completion);
+        for (String name : completion) {
+            mp.put(name, mp.get(name)-1);
+        }
         
-        for (int i=0; i<completion.length; i++) {
-            if (!participant[i].equals(completion[i])) {
-                return participant[i];
+        String returnName="";
+        for (String name : mp.keySet()) {
+            if (mp.get(name) != 0) {
+                returnName = name;
+                break;
             }
         }
-        return participant[participant.length-1];
+        
+        return returnName;
+        
+        
     }
 }
