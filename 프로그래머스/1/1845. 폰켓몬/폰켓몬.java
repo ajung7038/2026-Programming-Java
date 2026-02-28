@@ -1,26 +1,22 @@
-import java.util.Map;
-import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
+import java.lang.Math;
 
 class Solution {
     public int solution(int[] nums) {
-        // N마리 중 N/2마리 가져갈 수 있다.
-        // 같은 종류의 폰켓몬은 같은 번호 소유
-        // 조합
-        // 최대한 많은 종류의 폰켓몬을 가지고 싶어 함. -> 몇 종류인지 return
+        // N/2마리를 가져갈 수 있음
+        // 몇 종류가 있는지 확인
+            // 만약 N/2보다 종류가 적다면 그만큼의 종류를 가져갈 수 있음
+            // 만약 종류 수보다 N/2가 적다면 N/2만큼의 종류를 가져갈 수 있음
+        // 따라서, 종류와 가져갈 수 있는 개수의 최솟값을 리턴하면 됨.
+        // 종류당 몇 마리는 중요하지 않기 때문에 Set을 통해 중복 값 제거
         
-        // 같은 종류 합치기 -> map
-        // 종류, 마릿수 비교 -> 더 큰 값 리턴
+        Set<Integer> set = new HashSet<>();
         
-        // <종류, 개수>
-        Map<Integer, Integer> mp = new HashMap<>();
-        
-        for (int type : nums) {
-            mp.put(type, mp.getOrDefault(type, 0) +1);
+        for (int num : nums) {
+            set.add(num);
         }
         
-        int typeSize = mp.size(); // 종류
-        int num = nums.length/2;
-        
-        return typeSize < num ? typeSize : num;
+        return Math.min(set.size(), nums.length/2);
     }
 }
