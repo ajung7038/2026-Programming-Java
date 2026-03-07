@@ -21,8 +21,8 @@ class Solution {
                     if (c == ')' && vsC == '(') continue;
                     else if (c == ']' && vsC == '[') continue;
                     else if (c == '}' && vsC == '{') continue;
-                    else flag = false; break;
-                    
+                    else flag = false;
+                    break;
                 }
             }
             if (flag && stack.isEmpty()) result++;
@@ -30,6 +30,7 @@ class Solution {
             String first = s.substring(0, 1);
             String last = s.substring(1, len);
             s = last+first;
+            stack.clear();
         }
         
         return result;
